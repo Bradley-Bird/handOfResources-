@@ -12,6 +12,14 @@ describe('alien routes', () => {
     const resp = await request(app).get('/aliens');
     expect(resp.body).toEqual(alienData);
   });
+  it('/id display and alien by id', async () => {
+    const resp = await request(app).get('/aliens/1');
+    expect(resp.body).toEqual({
+      id: '1',
+      type: 'Flatwoods monster',
+      description: 'Tall humanoid with a spade-shaped head',
+    });
+  });
   afterAll(() => {
     pool.end();
   });
