@@ -13,4 +13,17 @@ describe('ff7 routes', () => {
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual(ff7Data);
   });
+  it('/:id displays a detail view of a ff7 character', async () => {
+    const resp = await request(app).get('/ff7/1');
+    expect(resp.status).toEqual(200);
+    expect(resp.body).toEqual({
+      id: '1',
+      name: 'Cloud Strife',
+      about:
+        'Former First Class SOLDIER. After defecting from Shinra, Cloud began work as a mercenary for hire in Midgar. With his trusty broadsword in hand, he always gets the job done.',
+    });
+  });
+  afterAll(() => {
+    pool.end();
+  });
 }); //end
