@@ -44,10 +44,7 @@ describe('alien routes', () => {
     expect(resp.status).toEqual(200);
 
     const response = await request(app).get('/aliens/1');
-    expect(response.body).toEqual({
-      status: 500,
-      message: "Cannot read properties of undefined (reading 'id')",
-    });
+    expect(response.body).toEqual('');
   });
   afterAll(() => {
     pool.end();

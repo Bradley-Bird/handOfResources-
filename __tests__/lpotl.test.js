@@ -41,17 +41,14 @@ describe('lpotl routes', () => {
     expect(resp.status).toEqual(200);
     expect(resp.body.name).toEqual('Ben the ben Kissel kissel (kissel)');
   });
-});
-it('delete /alien/:id should delete an alien', async () => {
-  const resp = await request(app).delete('/aliens/1');
-  expect(resp.status).toEqual(200);
+  it('delete /alien/:id should delete an lpotl', async () => {
+    const resp = await request(app).delete('/lpotl/1');
+    expect(resp.status).toEqual(200);
 
-  const response = await request(app).get('/aliens/1');
-  expect(response.body).toEqual({
-    status: 500,
-    message: "Cannot read properties of undefined (reading 'id')",
+    const response = await request(app).get('/lpotl/1');
+    expect(response.body).toEqual('');
   });
-});
-afterAll(() => {
-  pool.end();
+  afterAll(() => {
+    pool.end();
+  });
 });
