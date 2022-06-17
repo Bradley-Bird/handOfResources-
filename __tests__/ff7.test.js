@@ -23,6 +23,15 @@ describe('ff7 routes', () => {
         'Former First Class SOLDIER. After defecting from Shinra, Cloud began work as a mercenary for hire in Midgar. With his trusty broadsword in hand, he always gets the job done.',
     });
   });
+  it('PUT inserts a new ff7 character', async () => {
+    const resp = await request(app).post('/ff7').send({
+      name: 'Sephiroth',
+      about: 'evil bad one wing angel',
+    });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.name).toEqual('Sephiroth');
+    expect(resp.body.about).toEqual('evil bad one wing angel');
+  });
   afterAll(() => {
     pool.end();
   });
