@@ -27,6 +27,18 @@ describe('food routes', () => {
     expect(resp.body.name).toEqual('Borger');
     expect(resp.body.region).toEqual('Borger Town');
   });
+  it('put updates on /food/id', async () => {
+    const resp = await request(app).put('/food/1').send({ name: 'LARGE FOOD' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.name).toEqual('LARGE FOOD');
+  });
+  it('delete /food/:id should delete a food', async () => {
+    const resp = await request(app).delete('/food/1');
+    expect(resp.status).toEqual(200);
+
+    const response = await request(app).get('/food/1');
+    expect(response.body).toEqual('');
+  });
   afterAll(() => {
     pool.end();
   });
