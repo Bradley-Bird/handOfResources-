@@ -13,6 +13,11 @@ describe('food routes', () => {
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual(foodData);
   });
+  it('/id displays a food detail view ', async () => {
+    const resp = await request(app).get('/food/1');
+    expect(resp.status).toEqual(200);
+    expect(resp.body).toEqual({ id: '1', name: 'Tonkatsu', region: 'Japan' });
+  });
   afterAll(() => {
     pool.end();
   });
