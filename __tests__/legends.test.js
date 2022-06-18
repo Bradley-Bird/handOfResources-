@@ -35,6 +35,18 @@ describe('legends routes', () => {
     expect(resp.body.role).toEqual('Professional sitter downer');
     expect(resp.body.about).toEqual('Wow so good at sitting');
   });
+  it('put updates on /legends/id', async () => {
+    const resp = await request(app).put('/legends/1').send({ name: 'Belveth' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.name).toEqual('Belveth');
+  });
+  it('delete /legends/:id should delete a legends', async () => {
+    const resp = await request(app).delete('/legends/1');
+    expect(resp.status).toEqual(200);
+
+    const response = await request(app).get('/legends/1');
+    expect(response.body).toEqual('');
+  });
   afterAll(() => {
     pool.end();
   });
