@@ -18,6 +18,15 @@ describe('food routes', () => {
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual({ id: '1', name: 'Tonkatsu', region: 'Japan' });
   });
+  it('post inserts a new food', async () => {
+    const resp = await request(app).post('/food').send({
+      name: 'Borger',
+      region: 'Borger Town',
+    });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.name).toEqual('Borger');
+    expect(resp.body.region).toEqual('Borger Town');
+  });
   afterAll(() => {
     pool.end();
   });
