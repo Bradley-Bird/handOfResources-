@@ -24,6 +24,17 @@ describe('legends routes', () => {
         'A nightmarish empress created from the raw material of an entire devoured city, BelVeth is the end of Runeterra itself... and the beginning of a monstrous reality of her own design. Driven by epochs of repurposed history, knowledge, and memories from the world above, she voraciously feeds an ever-expanding need for new experiences and emotions, consuming all that crosses her path. Yet her wants could never be sated by only one world as she turns her hungry eyes toward the Voids old masters...',
     });
   });
+  it('post inserts a new legend', async () => {
+    const resp = await request(app).post('/legends').send({
+      name: 'Bradley Bird',
+      role: 'Professional sitter downer',
+      about: 'Wow so good at sitting',
+    });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.name).toEqual('Bradley Bird');
+    expect(resp.body.role).toEqual('Professional sitter downer');
+    expect(resp.body.about).toEqual('Wow so good at sitting');
+  });
   afterAll(() => {
     pool.end();
   });
